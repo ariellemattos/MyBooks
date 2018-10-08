@@ -58,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
     public void abrirInicio (View view){
@@ -76,6 +75,9 @@ public class MainActivity extends AppCompatActivity {
         //abrir a tela de inicio como padrão
         abrirInicio(null);
     }
+
+
+
 
     public void abrirCadastro(View v){
         startActivity(new Intent(this,

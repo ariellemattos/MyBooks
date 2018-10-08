@@ -20,11 +20,12 @@ import java.util.Arrays;
 import br.com.senaijandira.mybooks.db.MyBooksDataBase;
 import br.com.senaijandira.mybooks.model.Livro;
 
-public class CadastroActivity extends AppCompatActivity {
+public class EditarActivity extends AppCompatActivity {
 
     Bitmap livroCapa;
     ImageView imgLivroCapa;
     EditText txtTitulo, txtDescricao;
+    int idLivro;
 
     private final int COD_REQ_GALERIA = 101;
 
@@ -45,6 +46,15 @@ public class CadastroActivity extends AppCompatActivity {
         imgLivroCapa = findViewById(R.id.imgLivroCapa);
         txtTitulo = findViewById(R.id.txtTitulo);
         txtDescricao = findViewById(R.id.txtDescricao);
+
+        idLivro = getIntent().getIntExtra("livro", 0);
+
+        Livro livro = myBooksDb.daoLivro().pegarLivro(idLivro);
+
+        imgLivroCapa.setImageBitmap(Utils.toBitmap(livro.getCapa()));
+        livroCapa = BitmapFactory.decodeByteArray(livro.getCapa(), 0, livro.getCapa().length);
+        txtTitulo.setText(livro.getTitulo());
+        txtDescricao.setText(livro.getDescricao());
     }
 
     public void abrirGaleria(View view) {
@@ -57,11 +67,11 @@ public class CadastroActivity extends AppCompatActivity {
         startActivityForResult(
                 Intent.createChooser(intent,
                         "Selecione uma imagem"),
-                    COD_REQ_GALERIA
-                );
+                COD_REQ_GALERIA
+        );
     }
 
-    public void alert(String titulo, String msg){
+    public void alert(String titulo, String msg) {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setTitle(titulo);
         alert.setMessage("Livro salvo com sucesso");
@@ -75,14 +85,13 @@ public class CadastroActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == COD_REQ_GALERIA
-                && resultCode == Activity.RESULT_OK){
+        if (requestCode == COD_REQ_GALERIA
+                && resultCode == Activity.RESULT_OK) {
 
-            try{
+            try {
 
-                InputStream input =
-                        getContentResolver()
-                        .openInputStream(data.getData());
+                InputStream input = getContentResolver()
+                                .openInputStream(data.getData());
 
                 //Converteu para bitmap
                 livroCapa = BitmapFactory.decodeStream(input);
@@ -90,7 +99,7 @@ public class CadastroActivity extends AppCompatActivity {
                 //Exibindo na tela
                 imgLivroCapa.setImageBitmap(livroCapa);
 
-            }catch (Exception ex){
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
 
@@ -99,45 +108,37 @@ public class CadastroActivity extends AppCompatActivity {
 
     }
 
-    public void salvarLivro(View view) {
+    public void editarLivro(View view) {
 
-        byte[] capa = Utils.toByteArray(livroCapa);
+        if (livroCapa == null){
 
-        String titulo = txtTitulo.getText().toString();
+            alert("Erro", "Preencha todos os campos");
 
-        String descricao = txtDescricao.getText().toString();
+        } else {
 
-        Livro livro = new Livro(0, capa, titulo, descricao);
+            byte[] capa = Utils.toByteArray(livroCapa);
 
-        //Inserir na variável estática da MainActivity
-        /*
-        int tamanhoArray = MainActivity.livros.length;
-        MainActivity.livros =
-                Arrays.copyOf(
-                        MainActivity.livros,
-                        tamanhoArray+1);
-        MainActivity.livros[tamanhoArray] = livro;
-        */
+            String titulo = txtTitulo.getText().toString();
 
-        //Inserir no banco de dados
-        myBooksDb.daoLivro().inserir(livro);
+            String descricao = txtDescricao.getText().toString();
 
+            if (titulo.equals("") || descricao.equals("")) {
 
-        //          Alert
-        AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setTitle("Sucesso");
+                alert("Erro", "Preencha todos os campos");
 
-        alert.setMessage("Livro salvo com sucesso");
+            } else {
 
-        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                finish();
+                alert("Sucesso", "Livro atualizado com sucesso!");
+
+                Livro livro = new Livro(idLivro, capa, titulo, descricao);
+
+                myBooksDb.daoLivro().atualizar(livro);
+
             }
-        });
 
-        alert.create().show();
+        }
+
     }
-
 }
+
 
