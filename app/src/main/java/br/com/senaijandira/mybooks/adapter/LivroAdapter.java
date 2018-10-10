@@ -2,7 +2,6 @@ package br.com.senaijandira.mybooks.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -11,13 +10,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import br.com.senaijandira.mybooks.EditarActivity;
 import br.com.senaijandira.mybooks.R;
 import br.com.senaijandira.mybooks.Utils;
-
 import br.com.senaijandira.mybooks.db.MyBooksDataBase;
 import br.com.senaijandira.mybooks.model.Livro;
 
@@ -71,7 +70,7 @@ public class LivroAdapter extends ArrayAdapter<Livro> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), EditarActivity.class);
-                intent.putExtra("Livro", livro.getId());
+                intent.putExtra("id_livro", livro.getId());
 
                 getContext().startActivity(intent);
             }
@@ -84,6 +83,7 @@ public class LivroAdapter extends ArrayAdapter<Livro> {
             @Override
             public void onClick(View view) {
                 deletarLivro(livro);
+                Toast.makeText(getContext(), "Livro removido da lista", Toast.LENGTH_SHORT).show();
             }
         });
 

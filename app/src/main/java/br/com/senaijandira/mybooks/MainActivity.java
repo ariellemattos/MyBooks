@@ -1,25 +1,15 @@
 package br.com.senaijandira.mybooks;
 
-import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
 
-import br.com.senaijandira.mybooks.adapter.LivroAdapter;
-
-import br.com.senaijandira.mybooks.db.MyBooksDataBase;
 import br.com.senaijandira.mybooks.fragments.Inicio;
-import br.com.senaijandira.mybooks.model.Livro;
+import br.com.senaijandira.mybooks.fragments.Lidos;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,6 +35,10 @@ public class MainActivity extends AppCompatActivity {
                 if(tab.getPosition() == 0){
                     abrirInicio(null);
                 }
+                    if(tab.getPosition()== 1) {
+                        abrirLidos(null);
+
+                    }
             }
 
             @Override
@@ -66,6 +60,14 @@ public class MainActivity extends AppCompatActivity {
         ft.replace(R.id.frame_layout, new Inicio());
 
         ft.commit();
+    }
+
+
+    public void abrirLidos(View view){
+        FragmentTransaction ft = tela.beginTransaction();
+        ft.replace(R.id.frame_layout, new Lidos());
+        ft.commit();
+
     }
 
     @Override

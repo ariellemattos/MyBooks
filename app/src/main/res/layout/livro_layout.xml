@@ -71,7 +71,23 @@
 
                     />
 
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/lido"
+                    android:paddingTop="5dp"
+                    android:id="@+id/livrolido"
 
+                    />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ler"
+                    android:paddingTop="5dp"
+                    android:id="@+id/livroler"
+
+                    />
             </LinearLayout>
         </LinearLayout>
 

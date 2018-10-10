@@ -7,15 +7,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
 import java.io.InputStream;
-import java.util.Arrays;
-
 
 import br.com.senaijandira.mybooks.db.MyBooksDataBase;
 import br.com.senaijandira.mybooks.model.Livro;
@@ -34,7 +32,7 @@ public class EditarActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cadastro);
+        setContentView(R.layout.activity_editar);
 
         //Criando a instancia do banco de dados
         myBooksDb = Room.databaseBuilder(getApplicationContext(),
@@ -47,7 +45,7 @@ public class EditarActivity extends AppCompatActivity {
         txtTitulo = findViewById(R.id.txtTitulo);
         txtDescricao = findViewById(R.id.txtDescricao);
 
-        idLivro = getIntent().getIntExtra("livro", 0);
+        idLivro = getIntent().getIntExtra("id_livro", 0);
 
         Livro livro = myBooksDb.daoLivro().pegarLivro(idLivro);
 
@@ -77,6 +75,14 @@ public class EditarActivity extends AppCompatActivity {
         alert.setMessage("Livro salvo com sucesso");
 
         alert.setCancelable(false);
+
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+
         alert.create().show();
     }
 
@@ -128,12 +134,12 @@ public class EditarActivity extends AppCompatActivity {
 
             } else {
 
-                alert("Sucesso", "Livro atualizado com sucesso!");
 
                 Livro livro = new Livro(idLivro, capa, titulo, descricao);
 
                 myBooksDb.daoLivro().atualizar(livro);
 
+                alert("Sucesso", "Livro atualizado com sucesso!");
             }
 
         }

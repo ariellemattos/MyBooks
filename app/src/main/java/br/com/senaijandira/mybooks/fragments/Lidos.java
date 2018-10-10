@@ -16,14 +16,8 @@ import br.com.senaijandira.mybooks.adapter.LivroAdapter;
 import br.com.senaijandira.mybooks.db.MyBooksDataBase;
 import br.com.senaijandira.mybooks.model.Livro;
 
-/**
- * Created by 17259195 on 08/10/2018.
- */
+public class Lidos extends Fragment {
 
-public class Inicio extends Fragment {
-
-
-    //ListVew que carregará os livros
     ListView lstViewLivros;
 
 
@@ -32,16 +26,15 @@ public class Inicio extends Fragment {
     //Variavel de acesso ao Banco
     private MyBooksDataBase myBooksDb;
 
-    //Adapter para criar a lista de livros
     LivroAdapter adapter;
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_inicio, container, false);
+        View v = inflater.inflate(R.layout.fragment_lidos, container, false);
 
-        //Criando a instancia do banco de dados
         myBooksDb = Room.databaseBuilder( getContext(),
                 MyBooksDataBase.class, Utils.DATABASE_NAME)
                 .fallbackToDestructiveMigration()
@@ -58,16 +51,8 @@ public class Inicio extends Fragment {
         //Aqui faz um select no banco
         livros = myBooksDb.daoLivro().selecionarTodos();
 
-        //Limpando a listView
-        adapter.clear();
-
-
-        //Adicionando os livros a lista
-        adapter.addAll(livros);
-
         return v;
-
     }
 
-}
 
+}
