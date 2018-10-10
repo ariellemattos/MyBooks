@@ -135,7 +135,7 @@ public class EditarActivity extends AppCompatActivity {
             } else {
 
 
-                Livro livro = new Livro(idLivro, capa, titulo, descricao);
+                Livro livro = new Livro(idLivro, capa, titulo, descricao,0);
 
                 myBooksDb.daoLivro().atualizar(livro);
 

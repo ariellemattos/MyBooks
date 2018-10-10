@@ -12,19 +12,21 @@ public class Livro {
 
     //A imagem de capa é um array de bytes
     @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
-    private byte[] capa;
 
+    private byte[] capa;
     private String titulo;
     private String descricao;
+    private int status;
 
 
     public Livro(){}
 
-    public Livro(int id, byte[] capa, String titulo, String descricao){
+    public Livro(int id, byte[] capa, String titulo, String descricao, int status){
         this.id= id;
         this.capa = capa;
         this.titulo = titulo;
         this.descricao = descricao;
+        this.status = status;
     }
 
     public int getId() {
@@ -49,6 +51,14 @@ public class Livro {
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public int getStatus() {
+        return status;
     }
 
     public String getDescricao() {

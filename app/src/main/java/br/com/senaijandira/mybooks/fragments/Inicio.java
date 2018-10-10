@@ -69,5 +69,24 @@ public class Inicio extends Fragment {
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        atualizar();
+
+    }
+
+    public void atualizar(){
+
+        adapter.clear();
+
+        Livro[] livros = myBooksDb.daoLivro().selecionarTodos();
+
+        adapter.addAll(livros);
+
+    }
+
+
 }
 

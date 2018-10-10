@@ -26,6 +26,7 @@ import br.com.senaijandira.mybooks.model.Livro;
 
 public class LivroAdapter extends ArrayAdapter<Livro> {
 
+
     //Banco de dados
     private MyBooksDataBase myBooksDb;
 

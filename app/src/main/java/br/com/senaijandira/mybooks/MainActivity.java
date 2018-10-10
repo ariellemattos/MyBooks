@@ -17,9 +17,6 @@ public class MainActivity extends AppCompatActivity {
 
     TabLayout tab_menu;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,13 +29,12 @@ public class MainActivity extends AppCompatActivity {
         tab_menu.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                if(tab.getPosition() == 0){
+                if(tab.getPosition() == 0) {
                     abrirInicio(null);
-                }
-                    if(tab.getPosition()== 1) {
-                        abrirLidos(null);
+                } if(tab.getPosition() == 1){
+                    abrirLidos(null);
 
-                    }
+                }
             }
 
             @Override
@@ -77,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
         //abrir a tela de inicio como padrão
         abrirInicio(null);
     }
-
 
 
 
