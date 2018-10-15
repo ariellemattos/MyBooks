@@ -2,7 +2,7 @@
 
 Projeto criado para o curso: Técnico de informatica 
 
-Este projeto é uma estante virtual para listar seus livros, e desenvolvido para o projeto móvel do senai jandira. Este aplicativo possui as seguintes especificações:
+Este projeto é uma estante virtual para listar seus livros, e foi desenvolvido para o projeto móvel do senai jandira. Este aplicativo possui as seguintes especificações:
 
 * É possivel fazer cadastro de diferentes livros
 * É possivel editar as informações de livros já cadastrados
