@@ -12,6 +12,7 @@ import android.widget.ListView;
 
 import br.com.senaijandira.mybooks.R;
 import br.com.senaijandira.mybooks.Utils;
+import br.com.senaijandira.mybooks.adapter.LerAdapter;
 import br.com.senaijandira.mybooks.adapter.LidosAdapter;
 import br.com.senaijandira.mybooks.db.MyBooksDataBase;
 import br.com.senaijandira.mybooks.model.Livro;
@@ -20,7 +21,7 @@ import br.com.senaijandira.mybooks.model.Livro;
  * Created by 17259195 on 08/10/2018.
  */
 
-    public class Lidos extends Fragment {
+public class Ler extends Fragment {
 
 
     //ListVew que carregará os livros
@@ -39,7 +40,7 @@ import br.com.senaijandira.mybooks.model.Livro;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_lidos, container, false);
+        View v = inflater.inflate(R.layout.fragment_ler, container, false);
 
         //Criando a instancia do banco de dados
         myBooksDb = Room.databaseBuilder( getContext(),
@@ -72,7 +73,7 @@ import br.com.senaijandira.mybooks.model.Livro;
 
         adapter.clear();
 
-        Livro[] livros = myBooksDb.daoLivro().SelecionarLivrosLidos();
+        Livro[] livros = myBooksDb.daoLivro().SelecionarLivrosLer();
 
         adapter.addAll(livros);
 

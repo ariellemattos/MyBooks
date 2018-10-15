@@ -1,33 +1,34 @@
 package br.com.senaijandira.mybooks.adapter;
 
-import android.arch.persistence.room.Room;
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import br.com.senaijandira.mybooks.EditarActivity;
 import br.com.senaijandira.mybooks.R;
 import br.com.senaijandira.mybooks.Utils;
 import br.com.senaijandira.mybooks.db.MyBooksDataBase;
 import br.com.senaijandira.mybooks.model.Livro;
 
-public class LidosAdapter  extends ArrayAdapter<Livro> {
+/**
+ * Created by 17259195 on 15/10/2018.
+ */
 
-    //Banco de dados
-    private MyBooksDataBase myBooksDb;
+public class LerAdapter extends ArrayAdapter<Livro> {
 
-    public LidosAdapter(Context ctx, MyBooksDataBase myBooksDb ){
+//Banco de dados
+private MyBooksDataBase myBooksDb;
+
+    public LerAdapter(Context ctx, MyBooksDataBase myBooksDb ){
         super(ctx, 0, new ArrayList<Livro>());
         this.myBooksDb = myBooksDb;
     }
@@ -47,14 +48,13 @@ public class LidosAdapter  extends ArrayAdapter<Livro> {
         Toast.makeText(getContext(), "Livro removido da lista", Toast.LENGTH_SHORT).show();
     }
 
-
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View v = convertView;
 
         if (v == null){
-            v = LayoutInflater.from(getContext()).inflate(R.layout.livro_layout_lidos, parent, false);
+            v = LayoutInflater.from(getContext()).inflate(R.layout.livro_layout_ler, parent, false);
         }
 
         final Livro livro = getItem(position);
@@ -66,6 +66,7 @@ public class LidosAdapter  extends ArrayAdapter<Livro> {
         ImageView imgDeleteLivro = v.findViewById(
                 R.id.imgDeleteLivro);
 
+
         imgDeleteLivro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,7 +74,6 @@ public class LidosAdapter  extends ArrayAdapter<Livro> {
                 Toast.makeText(getContext(), "Livro removido da lista", Toast.LENGTH_SHORT).show();
             }
         });
-
 
 
         //Setando a imagem
@@ -86,13 +86,7 @@ public class LidosAdapter  extends ArrayAdapter<Livro> {
         //Setando a descrição do livro
         txtLivroDescricao.setText(livro.getDescricao());
 
-
-
-
         return v;
     }
-
-
-
 
 }

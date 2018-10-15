@@ -89,6 +89,51 @@ public class LivroAdapter extends ArrayAdapter<Livro> {
         });
 
 
+//        Onclick do icone de livros para ler
+        ImageView imglivroler = v.findViewById(R.id.imglivroler);
+
+        imglivroler.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Livro livroLido = new Livro(livro.getId(), livro.getCapa(), livro.getTitulo(), livro.getDescricao(), 2);
+
+                myBooksDb.daoLivro().atualizar(livroLido);
+
+                clear();
+
+                Livro[] livros = myBooksDb.daoLivro().selecionarTodos();
+
+                addAll(livros);
+
+                if (livro.getStatus() != 1)
+                    Toast.makeText(getContext(), "Livro adicionado na lista de livros para ler", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+        //Onclick de livros lidos
+      ImageView imglivrolido = v.findViewById(R.id.imglivrolido);
+
+        imglivrolido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Livro livroLido = new Livro(livro.getId(), livro.getCapa(), livro.getTitulo(), livro.getDescricao(), 1);
+
+                myBooksDb.daoLivro().atualizar(livroLido);
+
+                clear();
+
+                Livro[] livros = myBooksDb.daoLivro().selecionarTodos();
+
+                addAll(livros);
+
+                if (livro.getStatus() != 2)
+                    Toast.makeText(getContext(), "Livro adicionado na lista de livros lidos", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
         //Setando a imagem
         imgLivroCapa.setImageBitmap(
                 Utils.toBitmap(livro.getCapa()) );

@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import br.com.senaijandira.mybooks.fragments.Inicio;
+import br.com.senaijandira.mybooks.fragments.Ler;
 import br.com.senaijandira.mybooks.fragments.Lidos;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
                     abrirInicio(null);
                 } if(tab.getPosition() == 1){
                     abrirLidos(null);
+
+                } if(tab.getPosition() == 2){
+                    abrirLer(null);
 
                 }
             }
@@ -65,6 +69,15 @@ public class MainActivity extends AppCompatActivity {
         ft.commit();
 
     }
+
+    public void abrirLer(View view){
+        FragmentTransaction ft = tela.beginTransaction();
+        ft.replace(R.id.frame_layout, new Ler());
+        ft.commit();
+
+    }
+
+
 
     @Override
     protected void onResume() {
